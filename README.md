@@ -1,13 +1,13 @@
 # xml-extractor
 
-## For pulling :
+## Data Pull :
 
 extractor = new XmlDataExtractor(String xmlFileLocation, URL xsdLocation, Class jaxbFactoryClass)
 
 Iterable\<T> it = extractor.process(String xPath, Class\<T> clazz)
 
 
-## For pushing :
+## Data Push :
 
 extractor = new XmlDataExtractor(String xmlFileLocation, URL xsdLocation, Class jaxbFactoryClass)
 
