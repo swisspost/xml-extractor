@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<delivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.galinet.ch/xmlns/example/1 ../../main/resources/xsd/example.xsd" xmlns="http://www.galinet.ch/xmlns/example/1">
+	<header>
+		<title>title</title>
+		<description>description</description>
+	</header>
+	<persons>
+		<person>
+			<id>1</id>
+			<name>Doe</name>
+			<firstname>John</firstname>
+		</person>
+		<person>
+			<id>2</id>
+			<name>Doe</name>
+			<firstname>Jane</firstname>
+		</person>
+	</persons>
+</delivery>

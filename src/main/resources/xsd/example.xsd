@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:example="http://www.galinet.ch/xmlns/example/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.galinet.ch/xmlns/example/1" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:element name="delivery">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="header" type="example:header"/>
+				<xs:element name="persons" type="example:persons"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="header">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="persons">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="person" type="example:person"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="person">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="firstname" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
