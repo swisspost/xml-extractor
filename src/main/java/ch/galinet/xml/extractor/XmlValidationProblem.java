@@ -2,9 +2,6 @@ package ch.galinet.xml.extractor;
 
 import javax.xml.stream.Location;
 
-/**
- * @author aellenn
- */
 public class XmlValidationProblem {
     public final static int SEVERITY_WARNING = 1;
     public final static int SEVERITY_ERROR = 2;
