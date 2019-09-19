@@ -2,8 +2,7 @@ package ch.galinet.xml.extractor;
 
 import org.codehaus.stax2.XMLStreamReader2;
 import org.codehaus.stax2.ri.Stax2ReaderAdapter;
-import org.codehaus.stax2.validation.XMLValidationSchema;
-import org.codehaus.stax2.validation.XMLValidationSchemaFactory;
+import org.codehaus.stax2.validation.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 public class XmlDataExtractor {
     private XMLStreamReader2 reader;
     private Unmarshaller unmarshaller;
+    private CustomValidationHandler validationHandler;
 
     private Class iteratorClass;
     private String iteratorPath;
@@ -47,6 +48,8 @@ public class XmlDataExtractor {
         if (xsdLocation != null) {
             XMLValidationSchemaFactory sf = XMLValidationSchemaFactory.newInstance(XMLValidationSchema.SCHEMA_ID_W3C_SCHEMA);
             XMLValidationSchema sv = sf.createSchema(xsdLocation);
+            validationHandler = new CustomValidationHandler();
+            reader.setValidationProblemHandler(validationHandler);
             reader.validateAgainst(sv);
         }
     }
@@ -60,6 +63,14 @@ public class XmlDataExtractor {
     public <T> void addElementListener(String path, Class<T> clazz, Consumer<T> consumer) {
         elements.put(path, consumer);
         classes.put(path, clazz);
+    }
+
+    public void addValidationProblemListener(Consumer<XmlValidationProblem> consumer) {
+        if (validationHandler != null) {
+            validationHandler.addValidationProblemConsumer(consumer);
+        } else {
+            throw new RuntimeException("No XSD defined in constructor, unable to process any validation");
+        }
     }
 
     public void process() throws JAXBException, XMLStreamException {
@@ -143,6 +154,26 @@ public class XmlDataExtractor {
                 return next;
             } finally {
                 hasNext = null;
+            }
+        }
+    }
+
+    class CustomValidationHandler implements ValidationProblemHandler {
+
+        private ArrayList<Consumer<XmlValidationProblem>> validationProblemConsumers = new ArrayList<>();
+
+        public void addValidationProblemConsumer(Consumer<XmlValidationProblem> consumer) {
+            validationProblemConsumers.add(consumer);
+        }
+
+        @Override
+        public void reportProblem(XMLValidationProblem problem) throws XMLValidationException {
+            if (validationProblemConsumers.size() > 0) {
+                XmlValidationProblem dto = new XmlValidationProblem(problem.getLocation(),
+                        problem.getMessage(), problem.getSeverity(), problem.getType());
+                validationProblemConsumers.forEach(c -> c.accept(dto));
+            } else {
+                throw XMLValidationException.createException(problem);
             }
         }
     }
