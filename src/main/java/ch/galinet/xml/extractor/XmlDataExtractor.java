@@ -44,6 +44,9 @@ public class XmlDataExtractor {
         unmarshaller = JAXBContext.newInstance(jaxbFactoryClass).createUnmarshaller();
 
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        
         reader = Stax2ReaderAdapter.wrapIfNecessary(xmlInputFactory.createXMLStreamReader(input, "UTF-8"));
         if (xsdLocation != null) {
             XMLValidationSchemaFactory sf = XMLValidationSchemaFactory.newInstance(XMLValidationSchema.SCHEMA_ID_W3C_SCHEMA);
