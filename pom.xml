@@ -4,7 +4,7 @@
 
     <groupId>org.swisspush</groupId>
     <artifactId>xml-extractor</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3</version>
 
     <developers>
         <developer>
