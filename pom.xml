@@ -6,6 +6,10 @@
     <artifactId>xml-extractor</artifactId>
     <version>1.3</version>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Extract objects from XML file using data pull or push</description>
+    <url>https://github.com/swisspush/xml-extractor</url>
+
     <developers>
         <developer>
             <name>Nils Aellen</name>
