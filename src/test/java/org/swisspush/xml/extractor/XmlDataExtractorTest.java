@@ -1,4 +1,4 @@
-package ch.galinet.xml.extractor;
+package org.swisspush.xml.extractor;
 
 import ch.galinet.xmlns.example._1.Header;
 import ch.galinet.xmlns.example._1.ObjectFactory;
