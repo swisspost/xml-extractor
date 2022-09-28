@@ -1,4 +1,4 @@
-package ch.galinet.xml.extractor;
+package org.swisspush.xml.extractor;
 
 import org.codehaus.stax2.XMLStreamReader2;
 import org.codehaus.stax2.ri.Stax2ReaderAdapter;

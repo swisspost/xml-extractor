@@ -1,4 +1,4 @@
-package ch.galinet.xml.extractor;
+package org.swisspush.xml.extractor;
 
 import javax.xml.stream.Location;
 
