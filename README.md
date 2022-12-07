@@ -4,8 +4,6 @@
 
 # xml-extractor
 
-[![Build project](https://github.com/swisspost/apikana/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/swisspost/apikana/actions/workflows/build.yml) <a href="https://www.npmjs.com/package/apikana"><img src="https://img.shields.io/npm/v/apikana"/></a>
-
 ## Data Pull :
 
 extractor = new XmlDataExtractor(String xmlFileLocation, URL xsdLocation, Class jaxbFactoryClass)
